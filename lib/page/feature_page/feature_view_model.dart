@@ -125,6 +125,7 @@ class FeatureViewModel extends BaseViewModel with PackageHelpMixin {
       '-n',
       launchActivity,
     ]);
+    print('MTMTMT FeatureViewModel.startApp ${launchActivity} ');
     showResultDialog(isSuccess: result != null && result.exitCode == 0);
   }
 

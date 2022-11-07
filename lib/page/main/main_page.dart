@@ -1,4 +1,5 @@
 import 'package:android_tool/page/android_log/android_log_page.dart';
+import 'package:android_tool/page/auto_script/view.dart';
 import 'package:android_tool/page/common/base_page.dart';
 import 'package:android_tool/page/feature_page/feature_page.dart';
 import 'package:android_tool/page/flie_manager/file_manager_page.dart';
@@ -30,6 +31,7 @@ class _MainPageState extends BasePage<MainPage, MainViewModel> {
   @override
   Widget contentView(BuildContext context) {
     var select = context.watch<MainViewModel>().selectedIndex;
+    print("MTMTMT $select}");
     return Row(
       children: <Widget>[
         DropTarget(
@@ -51,6 +53,7 @@ class _MainPageState extends BasePage<MainPage, MainViewModel> {
                 _leftItem("images/ic_folder.svg", "文件管理", 2),
                 _leftItem("images/ic_log.svg", "LogCat", 3),
                 _leftItem("images/ic_settings.svg", "设置", 4),
+                _leftItem("images/ic_settings.svg", "自动化", 6),
               ],
             ),
           ),
@@ -88,10 +91,13 @@ class _MainPageState extends BasePage<MainPage, MainViewModel> {
           deviceId: viewModel.deviceId);
     } else if (value == 4) {
       return AdbSettingDialog(viewModel.adbPath);
+    } else if (value == 6) {
+      return AutoPage(
+          deviceId: viewModel.deviceId
+      );
     } else {
       return Container();
     }
-    ;
   }
 
   Widget _leftItem(String image, String name, int index) {

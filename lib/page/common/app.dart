@@ -1,10 +1,23 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:event_bus/event_bus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:process_run/shell_run.dart';
 
 class App {
   static final App _app = App._();
 
-  App._();
+  App._() {
+    print('MTMTMT App._ ${Platform.environment['HOME']} ');
+    shell = Shell(
+      workingDirectory: userHome,
+      environment: Platform.environment,
+      throwOnError: false,
+      stderrEncoding: const Utf8Codec(),
+      stdoutEncoding: const Utf8Codec(),
+    );
+  }
 
   factory App() => _app;
 
@@ -13,7 +26,10 @@ class App {
   static const String adbFilePathKey = "adbFilePathKey";
 
   final EventBus eventBus = EventBus();
+  String? get userHome =>
+      Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
 
+  late Shell shell;
   String _deviceId = "";
 
   String _packageName = "";
@@ -69,6 +85,32 @@ class App {
     }
     return _adbPath;
   }
+
+  Future<List<ProcessResult>?> execShell(
+      String arguments, {
+        String loadingText = "执行中...",
+        void Function(Process process)? onProcess,
+      }) async {
+
+    var shell = Shell(
+      workingDirectory: Platform.environment['USERPROFILE'],
+      environment: Platform.environment,
+      throwOnError: false,
+      stderrEncoding: const Utf8Codec(),
+      stdoutEncoding: const Utf8Codec(),
+    );
+    try {
+      print('MTMTMT App.execShell ${shell.kill()} ');
+      return await shell.run(arguments, onProcess: onProcess);
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      print('MTMTMT App.execShell');
+      return null;
+    }
+  }
+
 }
 
 class DeviceIdEvent {

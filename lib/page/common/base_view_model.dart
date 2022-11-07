@@ -49,6 +49,7 @@ class BaseViewModel extends ChangeNotifier {
   }) async {
     setLoading(true, text: loadingText);
     try {
+      // print('MTMTMT BaseViewModel.exec ${shell.kill()} ');
       return await shell.runExecutableArguments(executable, arguments,
           onProcess: onProcess);
     } catch (e) {
@@ -61,6 +62,7 @@ class BaseViewModel extends ChangeNotifier {
 
   Future<ProcessResult?> execAdb(List<String> arguments,
       {void Function(Process process)? onProcess}) async {
+    // print('MTMTMT BaseViewModel.execAdb ${adbPath} ');
     if (adbPath.isEmpty) {
       showResultDialog(
         title: "ADB没有找到",

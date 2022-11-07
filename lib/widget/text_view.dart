@@ -23,6 +23,7 @@ class TextView extends StatelessWidget {
       style: TextStyle(
         color: color ?? const Color(0xFF383838),
         fontSize: fontSize,
+        decoration: TextDecoration.none,
       ),
     );
   }
@@ -49,6 +50,7 @@ class SelectableTextView extends StatelessWidget {
       style: TextStyle(
         color: color ?? const Color(0xFF383838),
         fontSize: fontSize,
+        decoration: TextDecoration.none,
       ),
     );
   }
