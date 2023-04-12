@@ -3,6 +3,7 @@ import 'package:android_tool/page/auto_script/view.dart';
 import 'package:android_tool/page/common/base_page.dart';
 import 'package:android_tool/page/feature_page/feature_page.dart';
 import 'package:android_tool/page/flie_manager/file_manager_page.dart';
+import 'package:android_tool/page/haimakeyboard/view.dart';
 import 'package:android_tool/page/main/devices_model.dart';
 import 'package:android_tool/widget/adb_setting_dialog.dart';
 import 'package:android_tool/widget/text_view.dart';
@@ -54,6 +55,7 @@ class _MainPageState extends BasePage<MainPage, MainViewModel> {
                 _leftItem("images/ic_log.svg", "LogCat", 3),
                 _leftItem("images/ic_settings.svg", "设置", 4),
                 _leftItem("images/ic_settings.svg", "自动化", 6),
+                _leftItem("images/ic_settings.svg", "海马设备键盘", 7),
               ],
             ),
           ),
@@ -93,6 +95,10 @@ class _MainPageState extends BasePage<MainPage, MainViewModel> {
       return AdbSettingDialog(viewModel.adbPath);
     } else if (value == 6) {
       return AutoPage(
+          deviceId: viewModel.deviceId
+      );
+    } else if (value == 7) {
+      return MaiMaPage(
           deviceId: viewModel.deviceId
       );
     } else {
